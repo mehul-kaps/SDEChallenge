@@ -21,7 +21,7 @@ public class MovingAverageQueue implements IMovingAverage {
 	/*
 	 * Queue DS which actually holds all the elements for which moving average is to be calculated.
 	 */
-	private Queue<Integer> eleQueue; 
+	private Queue<Double> eleQueue; 
 	
 	/*
 	 * Maximum size of the window for which moving average is to be calculated.
@@ -60,14 +60,13 @@ public class MovingAverageQueue implements IMovingAverage {
 	 * @return (Moving) Average of last N elements added.
 	 */
 	@Override
-	public double next(int newElement) {
+	public double next(Double newElement) {
 		eleQueue.offer(newElement);
 		sum += newElement;
 		
 		if(eleQueue.size()>this.windowSize){
 			sum -= eleQueue.poll();
 		}
-
 		
 		return Double.valueOf((df.format((double)sum/eleQueue.size())));
 	}
@@ -76,29 +75,29 @@ public class MovingAverageQueue implements IMovingAverage {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getAllElements() {
-		return eleQueue.toString();
+	public LinkedList<Double> getAllElements() {
+		return new LinkedList<Double>(eleQueue);
 	}
 
 	public static void main(String[] args) {
 		String format = "Average=%4.2f Elements=%s";
 		MovingAverageQueue maq = new MovingAverageQueue(5);
-		System.out.println(String.format(format, maq.next(8), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(2), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(7), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(4), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(9), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(2), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(6), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(8d), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(2d), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(7d), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(4d), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(9d), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(2d), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(6d), maq.getAllElements()));
 		
 		/**
-		 *  Average=8.00 Elements=[8]
-			Average=5.00 Elements=[8, 2]
-			Average=5.67 Elements=[8, 2, 7]
-			Average=5.25 Elements=[8, 2, 7, 4]
-			Average=6.00 Elements=[8, 2, 7, 4, 9]
-			Average=4.80 Elements=[2, 7, 4, 9, 2]
-			Average=5.60 Elements=[7, 4, 9, 2, 6]
+			Average=8.00 Elements=[8.0]
+			Average=5.00 Elements=[8.0, 2.0]
+			Average=5.67 Elements=[8.0, 2.0, 7.0]
+			Average=5.25 Elements=[8.0, 2.0, 7.0, 4.0]
+			Average=6.00 Elements=[8.0, 2.0, 7.0, 4.0, 9.0]
+			Average=4.80 Elements=[2.0, 7.0, 4.0, 9.0, 2.0]
+			Average=5.60 Elements=[7.0, 4.0, 9.0, 2.0, 6.0]
 		 */
 	}
 }

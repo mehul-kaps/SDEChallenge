@@ -2,6 +2,9 @@ package com.kaps.paytm.sde.movingavg;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,13 +41,14 @@ public class MovingavgApplicationTests {
 	 */
 	@Test
 	public void movingAveragePositiveTests() {
-		assertEquals(8.00, movingAverageQueueImpl.next(8),0.001);
-		assertEquals(5.00, movingAverageQueueImpl.next(2),0.001);
-		assertEquals(5.67, movingAverageQueueImpl.next(7),0.001);
-		assertEquals(5.25, movingAverageQueueImpl.next(4),0.001);
-		assertEquals(6.00, movingAverageQueueImpl.next(9),0.001);
-		assertEquals(4.80, movingAverageQueueImpl.next(2),0.001);
-		assertEquals(5.60, movingAverageQueueImpl.next(6),0.001);
+		movingAverageQueueImpl = new MovingAverageQueue(5);
+		assertEquals(8.00, movingAverageQueueImpl.next(8d),0.001);
+		assertEquals(5.00, movingAverageQueueImpl.next(2d),0.001);
+		assertEquals(5.67, movingAverageQueueImpl.next(7d),0.001);
+		assertEquals(5.25, movingAverageQueueImpl.next(4d),0.001);
+		assertEquals(6.00, movingAverageQueueImpl.next(9d),0.001);
+		assertEquals(4.80, movingAverageQueueImpl.next(2d),0.001);
+		assertEquals(5.60, movingAverageQueueImpl.next(6d),0.001);
 	}
 
 	/**
@@ -59,5 +63,45 @@ public class MovingavgApplicationTests {
 		catch(Throwable t) {
 			System.out.println(">>>> Exception : " + t.getMessage());
 		}
+	}
+	
+	/**
+	 * getAllElements tests
+	 * <li> initial test confirms addition of 5 elements and then calling getAllElements() and them compare against expected list.
+	 * <li> We add more elements than data structure's initial size. This will start rotating/removing elements from queue head and adding new elements to queue.
+	 */
+	@Test
+	public void checkMovingAverageElementsTest() {
+		movingAverageQueueImpl = new MovingAverageQueue(5);
+
+		movingAverageQueueImpl.next(8d);
+		movingAverageQueueImpl.next(2d);
+		movingAverageQueueImpl.next(7d);
+		movingAverageQueueImpl.next(4d);
+		movingAverageQueueImpl.next(9d);
+		
+		LinkedList<Double> elementsFromDS = movingAverageQueueImpl.getAllElements();
+		LinkedList<Double> elementsExpected = new LinkedList<Double>();
+		elementsExpected.add(8d);
+		elementsExpected.add(2d);
+		elementsExpected.add(7d);
+		elementsExpected.add(4d);
+		elementsExpected.add(9d);
+		
+		assertTrue(elementsFromDS.equals(elementsExpected));
+		
+		//Adding more elements than initial N size of the data structure, This will start rotating/removing elements from queue head.  
+		movingAverageQueueImpl.next(2d);
+		movingAverageQueueImpl.next(6d);
+		
+		elementsFromDS = movingAverageQueueImpl.getAllElements();
+		elementsExpected = new LinkedList<Double>();
+		elementsExpected.add(7d);
+		elementsExpected.add(4d);
+		elementsExpected.add(9d);
+		elementsExpected.add(2d);
+		elementsExpected.add(6d);
+		
+		assertTrue(elementsFromDS.equals(elementsExpected));
 	}
 }

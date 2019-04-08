@@ -32,12 +32,12 @@ public class MovingavgApplication {
 	public void calculateMovingAverage() {
 		String format = "Average=%4.2f Elements=%s";
 		MovingAverageQueue maq = new MovingAverageQueue(5);
-		System.out.println(String.format(format, maq.next(8), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(2), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(7), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(4), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(9), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(2), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(6), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(8d), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(2d), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(7d), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(4d), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(9d), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(2d), maq.getAllElements()));
+		System.out.println(String.format(format, maq.next(6d), maq.getAllElements()));
 	}
 }
