@@ -30,7 +30,7 @@ public class MovingavgApplication {
 	 */
 	@PostConstruct
 	public void calculateMovingAverage() {
-		String format = "@@ Average=%4.2f Elements=%s";
+		String format = "Average=%4.2f Elements=%s";
 		MovingAverageQueue maq = new MovingAverageQueue(5);
 		System.out.println(String.format(format, maq.next(8), maq.getAllElements()));
 		System.out.println(String.format(format, maq.next(2), maq.getAllElements()));

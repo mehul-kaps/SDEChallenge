@@ -1,4 +1,5 @@
 package com.kaps.paytm.sde.movingavg.impl;
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -30,6 +31,9 @@ public class MovingAverageQueue implements IMovingAverage {
 	 * Total of all the elements.
 	 */
 	private int sum = 0; 
+	
+	DecimalFormat df = new DecimalFormat("####0.00");
+
 
 	/**
 	 * Constructor accepts window size of moving average data structure.
@@ -63,7 +67,8 @@ public class MovingAverageQueue implements IMovingAverage {
 			sum -= eleQueue.poll();
 		}
 
-		return (double)sum/eleQueue.size();
+		
+		return Double.valueOf((df.format((double)sum/eleQueue.size())));
 	}
 
 	/**
