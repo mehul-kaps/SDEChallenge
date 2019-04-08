@@ -2,9 +2,7 @@ package com.kaps.paytm.sde.movingavg;
 
 /**
  * This interface defines the operations of data-structure for calculating moving average of last N elements added.
- * 
- * <br><li>Data-structure operations calculate the moving average with time complexity of O(1).
- * <br><li>Data-structure operations calculate the moving average with space complexity of O(1). [because upper bound of queue(N) is known up-front] 
+ * Implementation of this interface can provide specific algorithm approach for concrete implementation. For our case, We will be using queue.
  * @author Mehul Kapadia
  *
  */

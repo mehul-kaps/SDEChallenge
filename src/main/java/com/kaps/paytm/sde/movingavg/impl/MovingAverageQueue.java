@@ -10,9 +10,10 @@ import com.kaps.paytm.sde.movingavg.IMovingAverage;
 
 /**
  * Concrete implementation of the operations supported by IMovingAverage contract interface 
- * to calculate moving average of last N elements added. 
+ * to calculate moving average of last N elements added.
+ * <br><li>Data-structure operations calculate the moving average with time complexity of O(1).
+ * <br><li>Data-structure operations calculate the moving average with space complexity of O(1). [because upper bound of queue(N) is known up-front, that gives constant space/size complexity] <br> 
  * @author Mehul Kapadia
- *
  */
 @Component("movingAverageQueueImpl")
 public class MovingAverageQueue implements IMovingAverage {

@@ -31,7 +31,6 @@ public class MovingavgApplicationTests {
 
 	@Before
 	public void setup() {
-		System.out.println("####SET-UP#####");
 	}
 
 	/**
