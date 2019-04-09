@@ -15,8 +15,8 @@ import com.kaps.paytm.sde.movingavg.IMovingAverage;
  * <br><li>Data-structure operations calculate the moving average with space complexity of O(1). [because upper bound of queue(N) is known up-front, that gives constant space/size complexity] <br> 
  * @author Mehul Kapadia
  */
-@Component("movingAverageQueueImpl")
-public class MovingAverageQueue implements IMovingAverage {
+@Component("movingAverageImpl")
+public class MovingAverageImpl implements IMovingAverage {
 
 	/*
 	 * Queue DS which actually holds all the elements for which moving average is to be calculated.
@@ -33,14 +33,14 @@ public class MovingAverageQueue implements IMovingAverage {
 	 */
 	private int sum = 0; 
 	
-	DecimalFormat df = new DecimalFormat("####0.00");
+	private DecimalFormat df = new DecimalFormat("####0.00");
 
 
 	/**
 	 * Constructor accepts window size of moving average data structure.
 	 * @param windowSize (must be positive Integer) and cannot be change/updated once constructor is initialized.
 	 */
-	public MovingAverageQueue(@Value("#{ systemProperties['windowSize'] }") int windowSize) {
+	public MovingAverageImpl(@Value("#{ systemProperties['windowSize'] }") int windowSize) {
 		if(windowSize <=0)
 			throw new IllegalArgumentException("Window size of moving average data-structure must be positive Integer. Supplied value=[" + windowSize + "]");
 
@@ -50,10 +50,11 @@ public class MovingAverageQueue implements IMovingAverage {
 
 	/**
 	 * Method calculates and return moving average of last N elements added by accepting last element 'newElement'. 
-	 * <br><li>It uses queue as it's internal DS to store and keep track of elements being added into the data-structure.
-	 * <br><li>Method keeps track of total <b>'sum'</b> of all the elements,  <b>windowSize</b> - Window size of elements for which moving average to be calcualated.
-	 * <br><li>Total sum is calculated upon element addition and depending on the size of the queue and windowSize it removes element from internal queue data structure.
-	 * <br><li>Average is calculated based on total sum and queue size.  
+	 * <br><li>It uses queue as it's internal DS to store and keep track of elements being added into moving average data-structure.
+	 * <br><li>Method keeps track of total <b>'sum'</b> of all the elements,  <b>windowSize</b> - Window size of elements for which moving average to be calculated.
+	 * <br><li>Total sum is calculated upon element addition, if element queue size is greater than windowSize(N) then first element is removed(poll) from queue and also from total 'sum' 
+	 * <br><li>If element queue size is less than  windowSize(N) then element is simply added(offer) to sum.
+	 * <br><li>Average is calculated based on total 'sum' and queue size. Average is calculate with 2 decimal points precision. 
 	 * <br><br>
 	 * {@inheritDoc}
 	 * @param newElement - New element to be added/considered.
@@ -77,27 +78,5 @@ public class MovingAverageQueue implements IMovingAverage {
 	@Override
 	public LinkedList<Double> getAllElements() {
 		return new LinkedList<Double>(eleQueue);
-	}
-
-	public static void main(String[] args) {
-		String format = "Average=%4.2f Elements=%s";
-		MovingAverageQueue maq = new MovingAverageQueue(5);
-		System.out.println(String.format(format, maq.next(8d), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(2d), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(7d), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(4d), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(9d), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(2d), maq.getAllElements()));
-		System.out.println(String.format(format, maq.next(6d), maq.getAllElements()));
-		
-		/**
-			Average=8.00 Elements=[8.0]
-			Average=5.00 Elements=[8.0, 2.0]
-			Average=5.67 Elements=[8.0, 2.0, 7.0]
-			Average=5.25 Elements=[8.0, 2.0, 7.0, 4.0]
-			Average=6.00 Elements=[8.0, 2.0, 7.0, 4.0, 9.0]
-			Average=4.80 Elements=[2.0, 7.0, 4.0, 9.0, 2.0]
-			Average=5.60 Elements=[7.0, 4.0, 9.0, 2.0, 6.0]
-		 */
 	}
 }

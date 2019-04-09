@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.kaps.paytm.sde.movingavg.impl.MovingAverageQueue;
+import com.kaps.paytm.sde.movingavg.impl.MovingAverageImpl;
 
 /**
  * Test for moving average implementation class MovingAverageQueue. 
@@ -41,7 +41,7 @@ public class MovingavgApplicationTests {
 	 */
 	@Test
 	public void movingAveragePositiveTests() {
-		movingAverageQueueImpl = new MovingAverageQueue(5);
+		movingAverageQueueImpl = new MovingAverageImpl(5);
 		assertEquals(8.00, movingAverageQueueImpl.next(8d),0.001);
 		assertEquals(5.00, movingAverageQueueImpl.next(2d),0.001);
 		assertEquals(5.67, movingAverageQueueImpl.next(7d),0.001);
@@ -58,7 +58,7 @@ public class MovingavgApplicationTests {
 	public void movingAverageNegativeTests() 
 	{
 		try {
-			assertThrows(IllegalArgumentException.class, () -> new MovingAverageQueue(-1));
+			assertThrows(IllegalArgumentException.class, () -> new MovingAverageImpl(-1));
 		}
 		catch(Throwable t) {
 			System.out.println(">>>> Exception : " + t.getMessage());
@@ -72,7 +72,7 @@ public class MovingavgApplicationTests {
 	 */
 	@Test
 	public void checkMovingAverageElementsTest() {
-		movingAverageQueueImpl = new MovingAverageQueue(5);
+		movingAverageQueueImpl = new MovingAverageImpl(5);
 
 		movingAverageQueueImpl.next(8d);
 		movingAverageQueueImpl.next(2d);
