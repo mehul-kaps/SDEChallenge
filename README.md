@@ -86,7 +86,7 @@ There will be multiple aspects of high level design as follow.
 8. Spark Cluster
 
 
-
+<br>
 
 1. <b>Firewall:</b> User traffic from internet will be routed through firewall to ensure and remediate any http/https attacks Or non-http/https attack are stopped at the gate itself and those connection will be terminated from propogating into the system.
 2. <b>Load Balancer:</b> Load balancer like F5 will be used in-front of webservers to ensure request are being routed to multiple available webservers. In case of failure load balancer will use available webservers to route the request.
