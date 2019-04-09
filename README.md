@@ -80,3 +80,7 @@ We need to provide Google Analytic like services to our customers. Please provid
 ##### Provide metrics to customers with at most one hour delay.
 ##### Run with minimum downtime.
 ##### Have the ability to reprocess historical data in case of bugs in the processing logic.
+
+
+
+[[https://github.com/mehul-kaps/SDEChallenge/blob/master/images/Analytics-Backend.png|alt=analytics-backend-system]]
