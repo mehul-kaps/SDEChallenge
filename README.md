@@ -72,7 +72,7 @@ We need to provide Google Analytic like services to our customers. Please provid
 
 The high-level approach and software/harware stack components arrangement for the system like Google Analytics is as captured in diagram below.
   
-![PayTM Analytics System](https://github.com/mehul-kaps/SDEChallenge/blob/master/images/Analytics-Backend.png)
+![PayTM Analytics System](https://github.com/mehul-kaps/SDEChallenge/blob/master/images/PayTM-Analytics-Backend.png)
 
 There will be multiple aspects of high level design as follow.
 
