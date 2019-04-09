@@ -82,5 +82,5 @@ We need to provide Google Analytic like services to our customers. Please provid
 ##### Have the ability to reprocess historical data in case of bugs in the processing logic.
 
 
+![alt text](https://github.com/mehul-kaps/SDEChallenge/blob/master/images/Analytics-Backend.png)
 
-[[https://github.com/mehul-kaps/SDEChallenge/blob/master/images/Analytics-Backend.png|alt=analytics-backend-system]]
